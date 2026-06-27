@@ -16,20 +16,28 @@ export default function GoalCard(props: Props) {
 
   const goal = useAppSelector(selectGoalsMap)[props.id]
 
-  const onClick = (event: React.MouseEvent) => {
-    event.stopPropagation()
-    dispatch(setContentRedux(goal))
-    dispatch(setTypeRedux('Goal'))
-    dispatch(setIsOpenRedux(true))
-  }
+ const onClick = (event: React.MouseEvent) => {
+  console.log("Goal clicked")
 
+  event.stopPropagation()
+  dispatch(setContentRedux(goal))
+  dispatch(setTypeRedux('Goal'))
+  dispatch(setIsOpenRedux(true))
+}
   const asLocaleDateString = (date: Date) => new Date(date).toLocaleDateString()
 
   return (
     <Container key={goal.id} onClick={onClick}>
-      <TargetAmount>${goal.targetAmount}</TargetAmount>
-      <TargetDate>{asLocaleDateString(goal.targetDate)}</TargetDate>
-    </Container>
+  <GoalIcon>{goal.icon}</GoalIcon>
+
+  <TargetAmount>
+  ${goal.targetAmount}
+</TargetAmount>
+
+  <TargetDate>
+    {asLocaleDateString(goal.targetDate)}
+  </TargetDate>
+</Container>
   )
 }
 
@@ -53,4 +61,8 @@ const TargetAmount = styled.h2`
 const TargetDate = styled.h4`
   color: rgba(174, 174, 174, 1);
   font-size: 1rem;
+`
+const GoalIcon = styled.h1`
+  font-size: 4rem;
+  margin: 0;
 `
